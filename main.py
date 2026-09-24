@@ -1,5 +1,5 @@
 from paciente import Paciente
-pacientes:list[Paciente]=[]
+pacientes:list[Paciente]=[Paciente("11.111.111-1","Juan Perez",30,"Fonasa"),Paciente("22.222.222-2","Maria Gozalez",25,"Isapre")]
 
 def leer_numero(mensaje:str)->int:
     while True:
@@ -25,8 +25,8 @@ def menu():
 
 def agregar_paciente()->None:
     rut=input("Ingrese el RUT del paciente: ")
-    nombre=input("Ingrese nombre del paciente")
-    edad=leer_numero("Infrese edad del paciente")
+    nombre=input("Ingrese nombre del paciente: ")
+    edad=leer_numero("Infrese edad del paciente: ")
     print("Tipo de prevision del paciente")
     print("1.- Fonasa")
     print("2.- Isapre")
@@ -48,20 +48,57 @@ def agregar_paciente()->None:
     print(f"Total de pacientes: {len(pacientes)}")
 
 
+def imprimir_pacientes()->None:
+    if len(pacientes)==0:
+        print("No hay pacientes")
+    else:
+        for paciente in pacientes:
+            print(paciente)
+            print("-*20")
 
+
+
+def buscar_paciente()->Paciente:
+    rut=input("Ingrese RUT del paciente: ")
+    for p in pacientes:
+        if p.rut==rut:
+            return p
+    print("Paciente no encontrado.")
+    return None
+
+def imprimir_paciente()->None:
+    paciente=buscar_paciente()
+    if pacientes:
+        print(paciente)
+    else:
+        print("No se encontro el paciente")
+
+def eliminar_paciente()->None:
+    paciente=buscar_paciente()
+    if paciente:
+        pacientes.remove(paciente)
+        print("paciente eliminado")
+    else:
+        print("no se encontro el paciente")
+
+       
 def main():
     while True:
         opcion=menu()
         if opcion==1:
             print("Agregar paciente")
+            agregar_paciente()
         elif opcion==2:
             print("Editar paciente")
         elif opcion==3:
             print("Eliminar paciente")
+            eliminar_paciente
         elif opcion==4:
             print("Mostrar un paciente")
+            buscar_paciente()
         elif opcion==5:
             print("Mostrar todos los pacientes")
+            imprimir_pacientes()
         elif opcion==0:
             print("Saliendo del programa...")
             break
@@ -69,14 +106,6 @@ def main():
             print("Opcion invalida. Intente nuevamente.")
         
 
-def main():
-    opcion=menu()
-    print(f"Opcion seleccionada: {opcion}")
-
-def main():
-    # creando objeto paciente
-    p1=Paciente("11.111.111-1","Luis Arriagada",40,"Fonasa")
-    print(p1)
 
 
 if __name__=="__main__":
