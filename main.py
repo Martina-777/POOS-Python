@@ -81,6 +81,45 @@ def eliminar_paciente()->None:
     else:
         print("no se encontro el paciente")
 
+def editar_paciente()->None:
+    paciente=buscar_paciente()
+    if paciente:
+        print(paciente)
+        print("Menu de edición")
+        print("1.-Editar Nombre")
+        print("2.-Editar Edad")
+        print("3.-Editar Previsión")
+        print("0.-Salir")
+        op=leer_numero("Ingrese una opción:")
+        if op==1:
+            nombre_nuevo=input("Ingrese nuevo nombre:")
+            paciente.nombre=nombre_nuevo
+            print("Nombre Actualizado")
+        elif op==2:
+            edad_nueva=leer_numero("Ingrese nueva edad:")
+            paciente.edad=edad_nueva
+            print("Edad Actualizada")
+        elif op==3:
+            print("Tipos de previsión:")
+            print("1.- Fonasa")
+            print("2.- Isapre")
+            print("3.- Particular")
+            print("4.- Otro")
+            op=leer_numero("Seleccione una previsión:")
+            if op==1:
+                paciente.prevision="Fonasa"
+                print("Prevision Actualizada")
+            elif op==2:
+                paciente.prevision="Isapre"
+                ("Prevision Actualizada")
+            elif op==3:
+                paciente.prevision="Particular"
+                ("Prevision Actualizada")
+            elif op==4:
+                paciente.prevision="Otro"
+                print("Prevision Actualizada")                
+    else:
+        print("No se encontro el paciente.")
        
 def main():
     while True:
