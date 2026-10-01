@@ -42,7 +42,11 @@ def agregar_paciente()->None:
     elif op==4:
         prevision="Otro"
 
-    paciente=Paciente(rut,nombre,edad,prevision)
+    try:
+        paciente=Paciente(rut,nombre,edad,prevision)
+    except (ValueError, TypeError) as e:
+        print(f"Error al crear el paciente: {e}")
+        return
     pacientes.append(paciente)
     print("Paciente agregado exitosamente. ")
     print(f"Total de pacientes: {len(pacientes)}")
@@ -93,7 +97,11 @@ def editar_paciente()->None:
         op=leer_numero("Ingrese una opción:")
         if op==1:
             nombre_nuevo=input("Ingrese nuevo nombre:")
-            paciente.nombre=nombre_nuevo
+            try:
+                paciente.nombre=nombre_nuevo
+            except (ValueError,TypeError) as e:
+                print(f"Error al actualizar nombre: {e}")
+                return
             print("Nombre Actualizado")
         elif op==2:
             edad_nueva=leer_numero("Ingrese nueva edad:")
@@ -106,21 +114,26 @@ def editar_paciente()->None:
             print("3.- Particular")
             print("4.- Otro")
             op=leer_numero("Seleccione una previsión:")
-            if op==1:
-                paciente.prevision="Fonasa"
-                print("Prevision Actualizada")
-            elif op==2:
-                paciente.prevision="Isapre"
-                ("Prevision Actualizada")
-            elif op==3:
-                paciente.prevision="Particular"
-                ("Prevision Actualizada")
-            elif op==4:
-                paciente.prevision="Otro"
-                print("Prevision Actualizada")                
+            try:
+               if op==1:
+                    paciente.prevision="Fonasa"
+                    print("Prevision Actualizada")
+               elif op==2:
+                    paciente.prevision="Isapre"
+                    print("Prevision Actualizada")
+               elif op==3:
+                    paciente.prevision="Particular"
+                    print("Prevision Actualizada")
+               elif op==4:
+                    paciente.prevision="Otro"
+                    print("Prevision Actualizada")     
+            except (ValueError, TypeError) as e:
+                print(f"Error al actualizar la prevision: {e}")
+                return           
+            else:
+                print("Opcion invalida")
     else:
-        print("No se encontro el paciente.")
-       
+        print("No se encontro paciente")   
 def main():
     while True:
         opcion=menu()
